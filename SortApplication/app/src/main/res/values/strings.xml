@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Sort Application</string>
+    <array name="ListTest">
+        <item>Java</item>
+        <item>Kotlin</item>
+    </array>
+</resources>
