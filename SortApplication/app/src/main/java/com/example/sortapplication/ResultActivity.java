@@ -54,17 +54,19 @@ public class ResultActivity extends AppCompatActivity {
                 shellSort(Arrinput);
                 break;
             case "Radix Sort":
+                radixSort(Arrinput);
                 break;
             case "Quick Sort":
-                //QuickSort(Arrinput);
+                QuickSort(Arrinput,0,Arrinput.length-1);
                 break;
             case "Merge Sort":
-                //
+                Mergesort(Arrinput,0,Arrinput.length-1);
                 break;
             case "Bubble Sort":
                 bubbleSort(Arrinput);
                 break;
             case "Interchange":
+                interchangeSort(Arrinput);
                 break;
         }
        String strafterSort="";
@@ -255,4 +257,48 @@ public class ResultActivity extends AppCompatActivity {
             i++;
         }
     }
+    //Radix sort
+    public void radixSort(int[] A) {
+        int i, m = A[0], exp = 1, n = A.length;
+        int[] B = new int[10000];
+        for (i = 1; i < n; i++) //tìm số lớn nhất trong dãy
+        {
+            if (A[i] > m) {
+                m = A[i];
+            }
+        }
+        while (m / exp > 0) {
+            int[] bucket = new int[10];
+            for (i = 0; i < n; i++) //đếm phân bố các số từ 0..9
+            {
+                bucket[(A[i] / exp) % 10]++;
+            }
+            for (i = 1; i < 10; i++) {
+                bucket[i] += bucket[i - 1];
+            }
+            for (i = n - 1; i >= 0; i--) {
+                B[--bucket[(A[i] / exp) % 10]] = A[i];
+            }
+            for (i = 0; i < n; i++) {
+                A[i] = B[i];
+            }
+            exp *= 10;
+        }
+    }
+    //InterchangeSort
+    public void interchangeSort(int A[])
+    {
+        for (int i = 0; i < A.length-1; i++) {
+            for (int j = i + 1; j < A.length; j++) {
+                if (A[i] > A[j]) {
+                    int temp = A[i];
+                    A[i] = A[j];
+                    A[j] = temp;
+                }
+            }
+
+        }
+    }
+
+
 }

@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class MainPage extends AppCompatActivity {
     Spinner spinnergt;
     TextView txt;
-    Button btnNhap,btnSapxep;
+    Button btnNhap,btnSapxep,btnThoatud;
     String strResult = "";
     String arrgiaithuat[] = {"Insertion","Selection","Shell Sort","Radix Sort","Quick Sort","Merge Sort","Bubble Sort","Interchange"};
     @Override
@@ -24,6 +24,12 @@ public class MainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
         anhxa();
+        btnThoatud.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.custom_spinner,arrgiaithuat);
         adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown2);
         spinnergt.setAdapter(adapter);
@@ -38,11 +44,12 @@ public class MainPage extends AppCompatActivity {
         btnSapxep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(spinnergt.getSelectedItem().toString().equals("Radix Sort")||spinnergt.getSelectedItem().toString().equals("Interchange"))
-                {
-                    Toast.makeText(getApplication(),"Chưa hoàn thiện",Toast.LENGTH_SHORT).show();
-                }
-                else if (strResult.equals(""))
+//                if(spinnergt.getSelectedItem().toString().equals("Radix Sort")||spinnergt.getSelectedItem().toString().equals("Interchange"))
+//                {
+//                    Toast.makeText(getApplication(),"Chưa hoàn thiện",Toast.LENGTH_SHORT).show();
+//                }
+//                else
+                if (strResult.equals(""))
                 {
                     Toast.makeText(getApplication(),"Chưa nhập chuỗi",Toast.LENGTH_SHORT).show();
                 }
@@ -63,6 +70,7 @@ public class MainPage extends AppCompatActivity {
         spinnergt = (Spinner) findViewById(R.id.spngiaithuat);
         btnNhap = (Button) findViewById(R.id.btnNhap);
         btnSapxep = (Button) findViewById(R.id.btnSapxep);
+        btnThoatud = (Button) findViewById(R.id.btnThoatUD);
     }
 
     @Override
