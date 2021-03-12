@@ -56,7 +56,25 @@ public class ResultActivity extends AppCompatActivity {
                 break;
             case "Radix Sort":
                 try{
-                    radixSort(Arrinput,Arrinput.length);
+//                    int Arrsoam[] = new int[Arrinput.length];
+//                    int Arrsoduong[] = new int[Arrinput.length];
+//                    int demsoam = 0,demsoduong = 0;
+//                    for(int j = 0 ;j < Arrinput.length;i++)
+//                    {
+//
+//                        if(Arrinput[j]<0)
+//                        {
+//                            Arrsoam[demsoam]=Arrinput[j];
+//                            demsoam++;
+//                        }
+//                        else
+//                        {
+//                            Arrsoduong[demsoduong]=Arrinput[j];
+//                            demsoduong++;
+//                        }
+//                    }
+//
+                    radixSort(Arrinput);
                 }catch (Exception ex)
                 {
                     checkerro = 1;
@@ -274,33 +292,126 @@ public class ResultActivity extends AppCompatActivity {
         }
     }
     //Radix sort
-    public void radixSort(int[] A,int n) {
-        int i, m = A[0], exp = 1;
-        int[] B = new int[10000];
-        for (i = 1; i < n; i++) //tìm số lớn nhất trong dãy
-        {
-            if (A[i] > m) {
-                m = A[i];
+//    public void radixSort(int[] A,int n) {
+//        int i, m = A[0], exp = 1;
+//        int[] B = new int[n];
+//        for (i = 1; i < n; i++) //tìm số lớn nhất trong dãy
+//        {
+//            if (A[i] > m) {
+//                m = A[i];
+//            }
+//        }
+//        while (m / exp > 0)
+//        {
+//            int[] bucket = new int[10];
+//            for (i = 0; i < n; i++) //đếm phân bố các số từ 0..9
+//            {
+//                bucket[(A[i] / exp) % 10]++;
+//            }
+//            for (i = 1; i < 10; i++) {
+//                bucket[i] += bucket[i - 1];
+//            }
+//            for (i = n - 1; i >= 0; i--) {
+//                B[--bucket[(A[i] / exp) % 10]] = A[i];
+//            }
+//            for (i = 0; i < n; i++) {
+//                A[i] = B[i];
+//            }
+//            exp *= 10;
+//        }
+//    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+//    int getMax(int arr[], int n)
+//    {
+//        int mx = arr[0];
+//        for (int i = 1; i < n; i++)
+//            if (arr[i] > mx)
+//                mx = arr[i];
+//        return mx;
+//    }
+//
+//    // A function to do counting sort of arr[] according to
+//// the digit represented by exp.
+//    void countSort(int arr[], int n, int exp)
+//    {
+//        int output[] = new int[n] ; // output array
+//        int i, count[] = new int[]{0,0,0,0,0,0,0,0,0,0};
+//
+//        // Store count of occurrences in count[]
+//        for (i = 0; i < n; i++)
+//            count[(arr[i] / exp) % 10]++;
+//
+//        // Change count[i] so that count[i] now contains actual
+//        //  position of this digit in output[]
+//        for (i = 1; i < 10; i++)
+//            count[i] += count[i - 1];
+//
+//        // Build the output array
+//        for (i = n - 1; i >= 0; i--) {
+//            output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+//            count[(arr[i] / exp) % 10]--;
+//        }
+//
+//        // Copy the output array to arr[], so that arr[] now
+//        // contains sorted numbers according to current digit
+//        for (i = 0; i < n; i++)
+//            arr[i] = output[i];
+//    }
+//
+//    // The main function to that sorts arr[] of size n using
+//// Radix Sort
+//    void radixSort(int arr[], int n)
+//    {
+//        // Find the maximum number to know number of digits
+//        int m = getMax(arr, n);
+//
+//        // Do counting sort for every digit. Note that instead
+//        // of passing digit number, exp is passed. exp is 10^i
+//        // where i is current digit number
+//        for (int exp = 1; m / exp > 0; exp *= 10)
+//            countSort(arr, n, exp);
+//    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private int[] radixSort(int[] arr) {
+        // base, during the cycle automatically increase according to the size of the number of
+        int digitNumber = 1;
+        // barrels, positive and negative numbers a total of 20 barrels
+        int[][] bucket = new int[20][arr.length > 19 ? arr.length : 20];
+        // i represents the current cycle of base, such as 10, 100 ....
+        for (int i = 1, arrOrder = 0; i <= digitNumber;arrOrder = 0) {
+            // Indicates whether the current cycle has been expanded base
+            boolean digitExpand = false;
+            // the number of the current cycle number of buckets each bucket 20 stored
+            int[] numberAmount = new int[20];
+            // into the bucket
+            for (int num : arr) {
+                // digit represents the num which should be placed in a bucket 20 squares
+                int digit = (num / i) % 10;
+                // Here is plus 10, that is, after several positive with 10 buckets, barrels before negative with 10
+                digit += 10;
+                // numberAmount [digit] initial value 0 can be used directly
+                bucket[digit][numberAmount[digit]++] = num;
+                //Outermost loop // when the conditions need to be expanded once the current cycle have met the following conditions, namely the base multiplied by 10
+                // such as the first time through the loop digitNumber = 1, the current num = 2, then without increasing the
+                // num = 10 if you need to expand once the outermost loop
+                if (num >= (digitNumber * 10) && !digitExpand) {
+                    digitNumber *= 10;
+                    digitExpand = true;
+                }
             }
+            // retrieve data from the tub 20, to complete a sort
+            for (int j = 0; j < 20; j++) {
+                for (int k = 0; k < numberAmount[j]; k++) {
+                    arr[arrOrder++] = bucket[j][k];
+                }
+            }
+            // Each time through the loop i need to multiply 10
+            i *= 10;
         }
-        while (m / exp > 0)
-        {
-            int[] bucket = new int[10];
-            for (i = 0; i < n; i++) //đếm phân bố các số từ 0..9
-            {
-                bucket[(A[i] / exp) % 10]++;
-            }
-            for (i = 1; i < 10; i++) {
-                bucket[i] += bucket[i - 1];
-            }
-            for (i = n - 1; i >= 0; i--) {
-                B[--bucket[(A[i] / exp) % 10]] = A[i];
-            }
-            for (i = 0; i < n; i++) {
-                A[i] = B[i];
-            }
-            exp *= 10;
-        }
+
+        return arr;
     }
     //InterchangeSort
     public void interchangeSort(int A[])
