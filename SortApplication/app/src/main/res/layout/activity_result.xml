@@ -47,7 +47,7 @@
 
     <Button
         android:id="@+id/btnThoat"
-        android:text="thoát"
+        android:text="Quay lại"
         android:background="@drawable/custom_button2"
         android:textColor="@color/white"
         android:textSize="25sp"

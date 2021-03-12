@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 public class MainPage extends AppCompatActivity {
     Spinner spinnergt;
-    TextView txt;
+    TextView txt,tvchuoi;
     Button btnNhap,btnSapxep,btnThoatud;
     String strResult = "";
     String arrgiaithuat[] = {"Insertion","Selection","Shell Sort","Radix Sort","Quick Sort","Merge Sort","Bubble Sort","Interchange"};
@@ -71,6 +71,7 @@ public class MainPage extends AppCompatActivity {
         btnNhap = (Button) findViewById(R.id.btnNhap);
         btnSapxep = (Button) findViewById(R.id.btnSapxep);
         btnThoatud = (Button) findViewById(R.id.btnThoatUD);
+        tvchuoi = (TextView) findViewById(R.id.tvchuoi);
     }
 
     @Override
@@ -82,6 +83,7 @@ public class MainPage extends AppCompatActivity {
             {
                 strResult = data.getStringExtra("strResult");
                 //txt.setText(strResult);
+                tvchuoi.setText(strResult);
             }
         }
     }

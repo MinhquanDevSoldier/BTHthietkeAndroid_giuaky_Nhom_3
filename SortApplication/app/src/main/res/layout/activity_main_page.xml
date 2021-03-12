@@ -19,7 +19,7 @@
 
     <LinearLayout
         android:layout_width="360dp"
-        android:layout_height="520dp"
+        android:layout_height="465dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:background="@drawable/custom"
@@ -36,12 +36,20 @@
             android:text="Nhập chuỗi"
             android:textColor="@color/white"
             android:textSize="24sp" />
-
+        <TextView
+            android:id="@+id/tvchuoi"
+            android:textSize="30sp"
+            android:layout_marginTop="50dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            />
         <TextView
             android:id="@+id/test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="100dp"
             android:gravity="center"
             android:text="Chọn 1 trong 8 Giải thuật"
             android:textColor="@color/black"
@@ -57,30 +65,29 @@
             android:background="@drawable/style_spinner1"
             android:padding="5dp"
             android:textAlignment="center" />
-
         <Button
             android:id="@+id/btnSapxep"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/custom_button"
             android:text="Sắp xếp"
             android:textColor="@color/white"
             android:textSize="24sp" />
 
     </LinearLayout>
+
     <Button
         android:id="@+id/btnThoatUD"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_button2"
         android:text="Thoát"
         android:textAlignment="center"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
         android:textColor="@color/white"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:background="@drawable/custom_button2"
-        />
+        android:textStyle="bold" />
 </LinearLayout>

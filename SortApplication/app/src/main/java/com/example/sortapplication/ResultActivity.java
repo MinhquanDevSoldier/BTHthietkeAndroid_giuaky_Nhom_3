@@ -42,6 +42,7 @@ public class ResultActivity extends AppCompatActivity {
         }
         tvsorted.setText(strtoSort);
 
+        int checkerro = 0;
        switch (gtselected)
         {
             case "Insertion":
@@ -54,7 +55,13 @@ public class ResultActivity extends AppCompatActivity {
                 shellSort(Arrinput);
                 break;
             case "Radix Sort":
-                radixSort(Arrinput);
+                try{
+                    radixSort(Arrinput,Arrinput.length);
+                }catch (Exception ex)
+                {
+                    checkerro = 1;
+                }
+
                 break;
             case "Quick Sort":
                 QuickSort(Arrinput,0,Arrinput.length-1);
@@ -73,7 +80,15 @@ public class ResultActivity extends AppCompatActivity {
        for(i = 0; i < Arrinput.length;i++ ) {
            strafterSort = strafterSort + Arrinput[i] + ",";
        }
-       tvsorted.setText(strafterSort.substring(0,strafterSort.length()-1));
+       if(checkerro == 1)
+       {
+           tvsorted.setText("Thuật toán Radix Sort không thể sắp xếp dãy số có chứa số nguyên âm");
+       }
+       else
+       {
+           tvsorted.setText(strafterSort.substring(0,strafterSort.length()-1));
+       }
+
     }
     void Insertion(int arr[]) {
         int n = arr.length;
@@ -90,7 +105,8 @@ public class ResultActivity extends AppCompatActivity {
             arr[j + 1] = key;
         }
     }
-    void Selection(int arr[]) {
+
+     public void Selection(int arr[]) {
         int n = arr.length;
 
         // Duyệt qua từng phần tử của mảng
@@ -149,7 +165,7 @@ public class ResultActivity extends AppCompatActivity {
         }
     }
     // Hàm sắp xếp nổi bọt
-    void bubbleSort(int arr[]) {
+    public void bubbleSort(int arr[]) {
         int n = arr.length;
         for (int i = 0; i < n - 1; i++)
             for (int j = 0; j < n - i - 1; j++)
@@ -258,8 +274,8 @@ public class ResultActivity extends AppCompatActivity {
         }
     }
     //Radix sort
-    public void radixSort(int[] A) {
-        int i, m = A[0], exp = 1, n = A.length;
+    public void radixSort(int[] A,int n) {
+        int i, m = A[0], exp = 1;
         int[] B = new int[10000];
         for (i = 1; i < n; i++) //tìm số lớn nhất trong dãy
         {
@@ -267,7 +283,8 @@ public class ResultActivity extends AppCompatActivity {
                 m = A[i];
             }
         }
-        while (m / exp > 0) {
+        while (m / exp > 0)
+        {
             int[] bucket = new int[10];
             for (i = 0; i < n; i++) //đếm phân bố các số từ 0..9
             {
